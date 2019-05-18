@@ -147,7 +147,7 @@
     // to each element in a collection, returning the desired result — either
     // identity, an arbitrary callback, a property matcher, or a property accessor.
     var cb = function(value, context, argCount) {
-        if (value == null) return _.identity;
+        if (value == null) return _.identity; // 输入什么返回什么
         if (_.isFunction(value)) return optimizeCb(value, context, argCount);
         if (_.isObject(value)) return _.matcher(value);
         return _.property(value);
@@ -224,7 +224,7 @@
         return result;
     };
 
-    // 闭包
+    // 闭包 todo: why 闭包
     var property = function(key) {
         return function(obj) {
             return obj == null ? void 0 : obj[key];
@@ -275,7 +275,6 @@
     // notice: 不要传入一个带有 key 类型为 number 的对象！
     // notice: _.each 方法不能用 return 跳出循环（同样，Array.prototype.forEach 也不行）
     _.each = _.forEach = function(obj, iteratee, context) {
-        console.log(obj,iteratee,context);
         // 根据 context 确定不同的迭代函数
         iteratee = optimizeCb(iteratee, context);
         // 如果没有this则返回原函数
@@ -303,7 +302,7 @@
         // 应该仅 OOP 调用有效
         return obj;
     };
-    // todo: mark
+
     // Return the results of applying the iteratee to each element.
     // 与 ES5 中 Array.prototype.map 使用方法类似
     // 传参形式与 _.each 方法类似
@@ -319,7 +318,7 @@
             // 如果 obj 为对象，则 length 为 key.length
             // 如果 obj 为数组，则 length 为 obj.length
             length = (keys || obj).length,
-            results = Array(length); // 结果数组
+            results = Array(length); // 创建一个有相应length的空数组包含
 
         // 遍历
         for (var index = 0; index < length; index++) {
@@ -369,7 +368,6 @@
                 // 根据 dir 确定是向左还是向右遍历
                 index += dir;
             }
-
             return iterator(obj, iteratee, memo, keys, index, length);
         };
     }
@@ -386,7 +384,7 @@
     // The right-associative version of reduce, also known as `foldr`.
     // 与 ES5 中 Array.prototype.reduceRight 使用方法类似
     _.reduceRight = _.foldr = createReduce(-1);
-
+    // todo: mark
     // Return the first value which passes a truth test. Aliased as `detect`.
     // 寻找数组或者对象中第一个满足条件（predicate 函数返回 true）的元素
     // 并返回该元素值

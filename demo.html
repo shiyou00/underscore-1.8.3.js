@@ -9,7 +9,8 @@
 
 <script src="underscore.js"></script>
 <script>
-    _.each([1,2,3],console.log);
+    var sum = _.reduce([1, 2, 3], function(memo, cur){ return memo + cur; }, 0);
+    console.log(sum);
 </script>
 </body>
 </html>
